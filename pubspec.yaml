@@ -1,0 +1,47 @@
+name: laxminarayan_portfolio
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^0.19.3
+  google_fonts: ^2.0.0
+  get: ^3.26.0
+  url_launcher: ^6.0.3
+  http:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+      - family: Poppins
+        fonts:
+          - asset: assets/fonts/Lato-Regular.ttf
+          - asset: assets/fonts/Lato-Black.ttf
+          - asset: assets/fonts/Lato-Bold.ttf
+          - asset: assets/fonts/Lato-Light.ttf
+          - asset: assets/fonts/Lato-Thin.ttf
+          - asset: assets/fonts/Oswald-Bold.ttf
+          - asset: assets/fonts/Oswald-ExtraLight.ttf
+          - asset: assets/fonts/Oswald-Light.ttf
+          - asset: assets/fonts/Oswald-Medium.ttf
+          - asset: assets/fonts/Oswald-Regular.ttf
+          - asset: assets/fonts/Oswald-SemiBold.ttf
