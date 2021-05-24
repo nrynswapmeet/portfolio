@@ -306,7 +306,6 @@ class _LandingScreenState extends State<LandingScreen>
             SizedBox(height: 10),
             Wrap(
               alignment: WrapAlignment.center,
-
               // mainAxisSize: MainAxisSize.min,
               children: List.generate(
                 resourceController.socialLinks.length,
