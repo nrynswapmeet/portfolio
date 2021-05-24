@@ -9,7 +9,7 @@ class ResourceController extends GetxController {
 
   getProjects() async {
     var url = Uri.parse(
-        'https://raw.githubusercontent.com/laxminarayan1998/portfolio/main/api_data.json');
+        'https://raw.githubusercontent.com/laxminarayan1998/portfolio_data/main/api_data.json');
 
     try {
       final response = await http.get(url);

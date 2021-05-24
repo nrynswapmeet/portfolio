@@ -855,7 +855,7 @@ class _LandingScreenState extends State<LandingScreen>
                               text: 'DOWNLOAD RESUME',
                               press: () {
                                 String url =
-                                    'https://github.com/laxminarayan1998/portfolio/raw/main/Laxminarayan%20Resume.pdf';
+                                    'https://github.com/laxminarayan1998/portfolio_data/raw/main/Laxminarayan%20Resume.pdf';
                                 html.AnchorElement anchorElement =
                                     new html.AnchorElement(href: url);
                                 anchorElement.download = url;
