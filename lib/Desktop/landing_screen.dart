@@ -267,7 +267,7 @@ class _LandingScreenState extends State<LandingScreen>
               ),
               textAlign: TextAlign.left,
             ),
-            SizedBox(height: Get.height * 0.2),
+            SizedBox(height: Get.height * 0.15),
             GestureDetector(
               onTap: () {
                 Utility().launchURL('mailto:laxminarayan1998@icloud.com');
@@ -304,8 +304,10 @@ class _LandingScreenState extends State<LandingScreen>
               ),
             ),
             SizedBox(height: 10),
-            Row(
-              mainAxisSize: MainAxisSize.min,
+            Wrap(
+              alignment: WrapAlignment.center,
+
+              // mainAxisSize: MainAxisSize.min,
               children: List.generate(
                 resourceController.socialLinks.length,
                 (index) => MakeIcon(
@@ -745,7 +747,8 @@ class _LandingScreenState extends State<LandingScreen>
                             Text(
                               'Hello, I’m',
                               style: TextStyle(
-                                fontSize: 28,
+                                fontSize:
+                                    Responsive.isMobile(context) ? 18 : 28,
                                 color:
                                     Theme.of(context).textTheme.headline1.color,
                                 fontWeight: FontWeight.w500,
@@ -755,7 +758,8 @@ class _LandingScreenState extends State<LandingScreen>
                             Text.rich(
                               TextSpan(
                                 style: TextStyle(
-                                  fontSize: 40,
+                                  fontSize:
+                                      Responsive.isMobile(context) ? 20 : 40,
                                   color: const Color(0xff37ad6b),
                                 ),
                                 children: [
@@ -1086,6 +1090,7 @@ class _ProjectListState extends State<ProjectList> {
           ),
           SizedBox(height: 16),
           Row(
+            // alignment: WrapAlignment.center,
             children: List.generate(
               widget.techsUsed.length,
               (index) => buildTechUsedList(
@@ -1147,6 +1152,7 @@ class _ProjectListState extends State<ProjectList> {
         SizedBox(height: 16),
         Row(
           mainAxisSize: MainAxisSize.min,
+          // alignment: WrapAlignment.center,
           children: List.generate(
             widget.techsUsed.length,
             (index) => buildTechUsedList(
@@ -1206,11 +1212,11 @@ class _ProjectListState extends State<ProjectList> {
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
-        margin: EdgeInsets.all(30),
+        margin: EdgeInsets.all(20),
         color: !isHover
             ? Color(0xFF37AD6B).withOpacity(.17)
             : Color(0xFF37AD6B).withOpacity(.27),
-        padding: EdgeInsets.all(30),
+        padding: EdgeInsets.all(26),
         // height: 100,
         width: double.infinity,
         child: Column(
