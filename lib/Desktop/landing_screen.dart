@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -73,7 +74,7 @@ class _LandingScreenState extends State<LandingScreen>
                           style: GoogleFonts.roboto(
                             fontSize: 42,
                             fontWeight: FontWeight.bold,
-                            color: Theme.of(context).textTheme.headline1.color,
+                            color: Theme.of(context).textTheme.bodyText1.color,
                           ),
                           children: <TextSpan>[
                             TextSpan(
@@ -134,6 +135,20 @@ class _LandingScreenState extends State<LandingScreen>
                         }
                       },
                     ),
+                    Spacer(),
+                    Text(
+                      'COPYRIGHT © 2021, LAXMINARAYAN',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .color
+                            .withOpacity(.4),
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -263,7 +278,7 @@ class _LandingScreenState extends State<LandingScreen>
                   'laxminarayan1998@icloud.com',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Theme.of(context).textTheme.headline1.color,
+                    color: Theme.of(context).textTheme.bodyText1.color,
                     fontWeight: FontWeight.w700,
                   ),
                   textAlign: TextAlign.center,
@@ -281,7 +296,7 @@ class _LandingScreenState extends State<LandingScreen>
                   '+91 977 622 9989',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Theme.of(context).textTheme.headline1.color,
+                    color: Theme.of(context).textTheme.bodyText1.color,
                     fontWeight: FontWeight.w700,
                   ),
                   textAlign: TextAlign.center,
@@ -327,7 +342,7 @@ class _LandingScreenState extends State<LandingScreen>
                     'MOBILE APPLICATION DEVELOPER',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Theme.of(context).textTheme.headline1.color,
+                      color: Theme.of(context).textTheme.bodyText1.color,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -347,7 +362,7 @@ class _LandingScreenState extends State<LandingScreen>
               style: TextStyle(
                 fontSize: 12,
                 color:
-                    Theme.of(context).textTheme.headline1.color.withOpacity(.3),
+                    Theme.of(context).textTheme.bodyText1.color.withOpacity(.4),
               ),
               textAlign: TextAlign.left,
             ),
@@ -379,7 +394,7 @@ class _LandingScreenState extends State<LandingScreen>
               SizedBox(height: 30),
               BuildHeading(
                 context: context,
-                title: 'PORTFOLIO',
+                title: '\nPORTFOLIO',
               ),
               SizedBox(height: 20),
               Text(
@@ -389,23 +404,30 @@ class _LandingScreenState extends State<LandingScreen>
                 ),
                 textAlign: TextAlign.left,
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return ProjectList(
-                    index: index,
-                    projUrl: resourceController.projectsList[index]['projUrl'],
-                    projImage: resourceController.projectsList[index]
-                        ['projImage'],
-                    projDesc: resourceController.projectsList[index]
-                        ['projDesc'],
-                    projName: resourceController.projectsList[index]
-                        ['projName'],
-                    techsUsed: resourceController.projectsList[index]
-                        ['techsUsed'],
+              FutureBuilder(
+                future: resourceController.getProjects(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return ProjectList(
+                        index: index,
+                        projUrl: resourceController.projectsList[index].projUrl,
+                        projImage:
+                            resourceController.projectsList[index].projImage,
+                        projDesc:
+                            resourceController.projectsList[index].projDesc,
+                        projName:
+                            resourceController.projectsList[index].projName,
+                        techsUsed: resourceController.projectsList[index].tech,
+                      );
+                    },
+                    itemCount: resourceController.projectsList.length,
                   );
                 },
-                itemCount: resourceController.projectsList.length,
               )
             ],
           ),
@@ -421,17 +443,17 @@ class _LandingScreenState extends State<LandingScreen>
         color: Theme.of(context).scaffoldBackgroundColor,
       ),
       padding: Responsive.isMobile(context)
-          ? EdgeInsets.symmetric(horizontal: 54)
+          ? EdgeInsets.symmetric(horizontal: 50)
           : EdgeInsets.symmetric(horizontal: 84),
       // height: Get.height - 70,
-      constraints: BoxConstraints(minHeight: Get.height - 70),
+      constraints: BoxConstraints(minHeight: Get.height - 70, maxWidth: 1200),
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           BuildHeading(
             context: context,
-            title: 'ABOUT ME',
+            title: '\nABOUT ME',
           ),
           paraOne(),
           paraTwo(),
@@ -451,7 +473,7 @@ class _LandingScreenState extends State<LandingScreen>
 
   Text paraEleven() {
     return Text(
-      'Flutter - Dart - JAVA - Android - XML - Sketch - Photoshop - Firebase - Git - GitHub',
+      'Flutter - Dart - JAVA - Android - XML - Sketch - XD - Photoshop - Firebase - Git - GitHub',
       style: TextStyle(
         fontSize: 16,
         color: const Color(0xff37ad6b),
@@ -463,13 +485,13 @@ class _LandingScreenState extends State<LandingScreen>
 
   Text paraTen() {
     return Text(
-      'My current stack of languages/technologies is:',
+      'My current stack of languages/technologies is:\n',
       style: TextStyle(
         fontSize: 16,
-        color: Theme.of(context).textTheme.headline1.color,
+        color: Theme.of(context).textTheme.bodyText1.color,
         fontWeight: FontWeight.w700,
       ),
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.justify,
     );
   }
 
@@ -477,7 +499,7 @@ class _LandingScreenState extends State<LandingScreen>
     return Text.rich(
       TextSpan(
         style: TextStyle(
-            fontSize: 16, color: Theme.of(context).textTheme.headline1.color),
+            fontSize: 16, color: Theme.of(context).textTheme.bodyText1.color),
         children: [
           TextSpan(
             text:
@@ -486,10 +508,13 @@ class _LandingScreenState extends State<LandingScreen>
           WidgetSpan(
               child:
                   RatatedContainer(title: 'never settle.', latoFamily: true)),
+          TextSpan(
+            text: '\n',
+          ),
         ],
       ),
       textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false),
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.justify,
     );
   }
 
@@ -497,7 +522,7 @@ class _LandingScreenState extends State<LandingScreen>
     return Text.rich(
       TextSpan(
         style: TextStyle(
-            fontSize: 16, color: Theme.of(context).textTheme.headline1.color),
+            fontSize: 16, color: Theme.of(context).textTheme.bodyText1.color),
         children: [
           TextSpan(
             text: 'Slowly Steadily, I am shifting myself to ',
@@ -505,29 +530,22 @@ class _LandingScreenState extends State<LandingScreen>
           WidgetSpan(
               child: RatatedContainer(title: 'Flutter', latoFamily: true)),
           TextSpan(
-            text: ' Android Studio Tutorial',
-            style: TextStyle(
-              // fontWeight: FontWeight.w600,
-              decoration: TextDecoration.underline,
-            ),
-          ),
-          TextSpan(
             text:
-                ' because I found it is much easy and less code can produce good results in less time.',
+                ', because I found it is much easy and less code can produce good results in less time.\n',
           ),
         ],
       ),
       textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false),
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.justify,
     );
   }
 
   Text paraSeven() {
     return Text(
-      'Luckily after some months, I got my first freelancing project where I could learn new things and apply all the knowledge that I collected from all the sources.\nThis project indeed got me the confidence to accomplish a task within a deadline, though the app is beginner-level, but learned a lot about real-world problems & solutions. Since then I keep developing myself.',
+      'Luckily after some months, I got my first freelancing project where I could learn new things and apply all the knowledge that I have collected from all the sources. This project indeed got me the confidence to accomplish a task within a deadline, though the app is beginner-level, but learned a lot about real-world problems & solutions. Since then I keep developing myself.\n',
       style: TextStyle(
-          fontSize: 16, color: Theme.of(context).textTheme.headline1.color),
-      textAlign: TextAlign.center,
+          fontSize: 16, color: Theme.of(context).textTheme.bodyText1.color),
+      textAlign: TextAlign.justify,
     );
   }
 
@@ -535,12 +553,11 @@ class _LandingScreenState extends State<LandingScreen>
     return Text.rich(
       TextSpan(
         style: TextStyle(
-            fontSize: 16, color: Theme.of(context).textTheme.headline1.color),
+            fontSize: 16, color: Theme.of(context).textTheme.bodyText1.color),
         children: [
           TextSpan(text: 'During this time, I took online courses like '),
           TextSpan(
-            text:
-                'The Complete Android Oreo Developer Course -\n Build 23 Apps!',
+            text: 'The Complete Android Oreo Developer Course - Build 23 Apps!',
             style: TextStyle(
                 // fontWeight: FontWeight.w600,
                 decoration: TextDecoration.underline),
@@ -559,28 +576,28 @@ class _LandingScreenState extends State<LandingScreen>
             ),
           ),
           TextSpan(
-            text: ' and watched countless YouTube videos about android.',
+            text: ' and watched countless YouTube videos about android.\n',
           ),
         ],
       ),
       textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false),
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.justify,
     );
   }
 
   Text paraFive() {
     return Text(
-        'In July 2019, We had a super cyclone-hit Odisha. Everything almost destructed. Schools, colleges had to shut down for the reconstruction. I got a chance to start learning & developing apps. \nSo, I woke up early morning to study JAVA, Android. I quickly started to love Android. I have been studying application development full time ever since.',
+        'In July 2019, We had a super cyclone struck Odisha. Everything almost destructed. Schools, colleges had to shut down for the reconstruction. I got a chance to stay in home, start learning & developing apps. So, I woke up early morning to study JAVA, Android. I quickly started to love Android. I have been studying application development full time ever since.\n',
         style: TextStyle(
-            fontSize: 16, color: Theme.of(context).textTheme.headline1.color),
-        textAlign: TextAlign.center);
+            fontSize: 16, color: Theme.of(context).textTheme.bodyText1.color),
+        textAlign: TextAlign.justify);
   }
 
   Text paraFour() {
     return Text.rich(
         TextSpan(
           style: TextStyle(
-              fontSize: 16, color: Theme.of(context).textTheme.headline1.color),
+              fontSize: 16, color: Theme.of(context).textTheme.bodyText1.color),
           children: [
             TextSpan(text: 'In August 2017, I took admission to '),
             TextSpan(
@@ -593,23 +610,23 @@ class _LandingScreenState extends State<LandingScreen>
                 style: TextStyle(fontWeight: FontWeight.w800)),
             TextSpan(
                 text:
-                    ', \nthought now I would learn about the technology in college, where I competed for 2years,\n but I only learned basic JAVA programming language,'),
+                    ', thought now I would learn about the technology in college, where I competed for 2years, but I only learned basic JAVA programming language,'),
             TextSpan(
-              text: ' I wasn’t learning and improving, I felt stuck.',
+              text: ' I wasn’t learning and improving, I felt stuck.\n',
               style: TextStyle(fontWeight: FontWeight.w800),
             ),
           ],
         ),
         textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false),
-        textAlign: TextAlign.center);
+        textAlign: TextAlign.justify);
   }
 
   Text paraThree() {
     return Text(
-      'I started using a smartphone when I was in the 6th standard, then the apps in it attracted me, and was curious how these \napps are being made. Since then I decided to build my career in the IT field.',
+      'I started using a smartphone when I was in the 6th standard, then the apps in it attracted me, and was curious how these apps are being made. Since then I decided to build my career in the IT field.\n',
       style: TextStyle(
-          fontSize: 16, color: Theme.of(context).textTheme.headline1.color),
-      textAlign: TextAlign.center,
+          fontSize: 16, color: Theme.of(context).textTheme.bodyText1.color),
+      textAlign: TextAlign.justify,
     );
   }
 
@@ -617,7 +634,7 @@ class _LandingScreenState extends State<LandingScreen>
     return Text.rich(
       TextSpan(
         style: TextStyle(
-            fontSize: 16, color: Theme.of(context).textTheme.headline1.color),
+            fontSize: 16, color: Theme.of(context).textTheme.bodyText1.color),
         children: [
           TextSpan(
             text: 'I\'m ',
@@ -642,11 +659,11 @@ class _LandingScreenState extends State<LandingScreen>
           WidgetSpan(
               child: RatatedContainer(title: 'Bhubaneswar', latoFamily: true)),
           TextSpan(
-            text: '.',
+            text: '.\n',
           ),
         ],
       ),
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.justify,
     );
   }
 
@@ -654,7 +671,7 @@ class _LandingScreenState extends State<LandingScreen>
     return Text.rich(
       TextSpan(
         style: TextStyle(
-            fontSize: 16, color: Theme.of(context).textTheme.headline1.color),
+            fontSize: 16, color: Theme.of(context).textTheme.bodyText1.color),
         children: [
           TextSpan(text: 'If you’re '),
           TextSpan(
@@ -665,9 +682,10 @@ class _LandingScreenState extends State<LandingScreen>
           ),
           TextSpan(text: ' who '),
           TextSpan(text: 'I am', style: TextStyle(fontWeight: FontWeight.w800)),
-          TextSpan(text: '…'),
+          TextSpan(text: '…\n'),
         ],
       ),
+      textAlign: TextAlign.justify,
     );
   }
 
@@ -689,7 +707,7 @@ class _LandingScreenState extends State<LandingScreen>
                         opacity: .4,
                         child: Image.asset(
                           'assets/images/MY_IMAGE.png',
-                          height: Get.height * 0.8,
+                          height: Get.height * 0.9,
                         ),
                       ),
                     )
@@ -719,7 +737,7 @@ class _LandingScreenState extends State<LandingScreen>
                     alignment: Alignment.center,
                     children: [
                       Positioned(
-                        left: Responsive.isMobile(context) ? 32 : 82,
+                        left: Responsive.isMobile(context) ? 52 : 82,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -729,7 +747,7 @@ class _LandingScreenState extends State<LandingScreen>
                               style: TextStyle(
                                 fontSize: 28,
                                 color:
-                                    Theme.of(context).textTheme.bodyText1.color,
+                                    Theme.of(context).textTheme.headline1.color,
                                 fontWeight: FontWeight.w500,
                               ),
                               textAlign: TextAlign.left,
@@ -752,7 +770,7 @@ class _LandingScreenState extends State<LandingScreen>
                                     style: TextStyle(
                                       color: Theme.of(context)
                                           .textTheme
-                                          .bodyText1
+                                          .headline1
                                           .color,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -803,15 +821,27 @@ class _LandingScreenState extends State<LandingScreen>
                                           .color,
                                     ),
                                   ),
-                                  TextSpan(
-                                    text: 'Let’s talk.',
-                                    style: TextStyle(
-                                      fontFamily: 'Lato',
-                                      fontWeight: FontWeight.w600,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          .color,
+                                  WidgetSpan(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Scrollable.ensureVisible(
+                                            contactMeKey.currentContext,
+                                            duration: Duration(seconds: 1));
+                                      },
+                                      child: MouseRegion(
+                                        cursor: SystemMouseCursors.click,
+                                        child: Text(
+                                          'Let’s talk.',
+                                          style: TextStyle(
+                                            fontFamily: 'Lato',
+                                            fontWeight: FontWeight.w600,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1
+                                                .color,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -823,7 +853,14 @@ class _LandingScreenState extends State<LandingScreen>
                             SizedBox(height: 18),
                             DefaultButton(
                               text: 'DOWNLOAD RESUME',
-                              press: () {},
+                              press: () {
+                                String url =
+                                    'https://github.com/laxminarayan1998/portfolio/raw/main/Laxminarayan%20Resume.pdf';
+                                html.AnchorElement anchorElement =
+                                    new html.AnchorElement(href: url);
+                                anchorElement.download = url;
+                                anchorElement.click();
+                              },
                             )
                           ],
                         ),
@@ -915,7 +952,7 @@ class _MakeIconState extends State<MakeIcon> {
                       BoxShadow(
                         color: Theme.of(context)
                             .textTheme
-                            .headline1
+                            .bodyText1
                             .color
                             .withAlpha(20),
                         blurRadius: 6.0,
@@ -930,11 +967,23 @@ class _MakeIconState extends State<MakeIcon> {
             },
             style: OutlinedButton.styleFrom(
               shape: CircleBorder(),
-              side: BorderSide(width: 1.5, color: Colors.green),
+              side: BorderSide(
+                width: 1.5,
+                color: isHover
+                    ? kPrimaryColor
+                    : Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .color
+                        .withOpacity(.6),
+              ),
             ),
             child: SvgPicture.asset(
               widget.path,
               height: 16,
+              color: isHover
+                  ? kPrimaryColor
+                  : Theme.of(context).textTheme.bodyText1.color.withOpacity(.6),
             ),
           ),
         ),
@@ -943,7 +992,7 @@ class _MakeIconState extends State<MakeIcon> {
   }
 }
 
-class ProjectList extends StatelessWidget {
+class ProjectList extends StatefulWidget {
   final String projName;
   final String projImage;
   final String projDesc;
@@ -961,6 +1010,13 @@ class ProjectList extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _ProjectListState createState() => _ProjectListState();
+}
+
+class _ProjectListState extends State<ProjectList> {
+  bool isHover = false;
+
+  @override
   Widget build(BuildContext context) {
     var imgForDesktop = Expanded(
       child: Stack(
@@ -969,8 +1025,8 @@ class ProjectList extends StatelessWidget {
           Opacity(
               child: Padding(
                 padding: const EdgeInsets.all(14.0),
-                child: Image.asset(projImage,
-                    color: Theme.of(context).textTheme.headline1.color),
+                child: Image.asset(widget.projImage,
+                    color: Theme.of(context).textTheme.bodyText1.color),
               ),
               opacity: 0.2),
           ClipRect(
@@ -979,7 +1035,7 @@ class ProjectList extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Image.asset(
-                  projImage,
+                  widget.projImage,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -995,8 +1051,8 @@ class ProjectList extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(14.0),
               child: Image.asset(
-                projImage,
-                color: Theme.of(context).textTheme.headline1.color,
+                widget.projImage,
+                color: Theme.of(context).textTheme.bodyText1.color,
                 width: Get.width * 0.4,
               ),
             ),
@@ -1007,7 +1063,7 @@ class ProjectList extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Image.asset(
-                projImage,
+                widget.projImage,
                 fit: BoxFit.cover,
                 width: Get.width * 0.4,
               ),
@@ -1021,20 +1077,20 @@ class ProjectList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '$projDesc',
+            '${widget.projDesc}',
             style: TextStyle(
               fontSize: 14,
-              color: Theme.of(context).textTheme.headline1.color,
+              color: Theme.of(context).textTheme.bodyText1.color,
             ),
             textAlign: TextAlign.left,
           ),
           SizedBox(height: 16),
           Row(
             children: List.generate(
-              techsUsed.length,
+              widget.techsUsed.length,
               (index) => buildTechUsedList(
-                techsUsed[index]['icon'],
-                techsUsed[index]['name'],
+                widget.techsUsed[index]['icon'],
+                widget.techsUsed[index]['name'],
               ),
             ),
           ),
@@ -1052,7 +1108,7 @@ class ProjectList extends StatelessWidget {
             // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             // color: kPrimaryColor,
             onPressed: () {
-              Utility().launchURL(projUrl);
+              Utility().launchURL(widget.projUrl);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 22, vertical: 6),
@@ -1081,10 +1137,10 @@ class ProjectList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          '$projDesc',
+          '${widget.projDesc}',
           style: TextStyle(
             fontSize: 14,
-            color: Theme.of(context).textTheme.headline1.color,
+            color: Theme.of(context).textTheme.bodyText1.color,
           ),
           textAlign: TextAlign.justify,
         ),
@@ -1092,10 +1148,10 @@ class ProjectList extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: List.generate(
-            techsUsed.length,
+            widget.techsUsed.length,
             (index) => buildTechUsedList(
-              techsUsed[index]['icon'],
-              techsUsed[index]['name'],
+              widget.techsUsed[index]['icon'],
+              widget.techsUsed[index]['name'],
             ),
           ),
         ),
@@ -1113,7 +1169,7 @@ class ProjectList extends StatelessWidget {
           // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           // color: kPrimaryColor,
           onPressed: () {
-            Utility().launchURL(projUrl);
+            Utility().launchURL(widget.projUrl);
           },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 22, vertical: 6),
@@ -1137,37 +1193,52 @@ class ProjectList extends StatelessWidget {
         )
       ],
     );
-    return Container(
-      margin: EdgeInsets.all(20),
-      color: Color(0xFF37AD6B).withOpacity(.27),
-      padding: EdgeInsets.all(30),
-      // height: 100,
-      width: double.infinity,
-      child: Column(
-        children: [
-          RatatedContainer(title: '$projName'),
-          SizedBox(height: 16),
-          Responsive.isDesktop(context)
-              ? index % 2 == 0
-                  ? Row(
-                      children: [
-                        imgForDesktop,
-                        descForDesktop,
-                      ],
-                    )
-                  : Row(
-                      children: [
-                        imgForDesktop,
-                        descForDesktop,
-                      ],
-                    )
-              : Column(
-                  children: [
-                    imgForTablet,
-                    descForTablet,
-                  ],
-                ),
-        ],
+    return MouseRegion(
+      onEnter: (event) {
+        setState(() {
+          isHover = true;
+        });
+      },
+      onExit: (event) {
+        setState(() {
+          isHover = false;
+        });
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        margin: EdgeInsets.all(30),
+        color: !isHover
+            ? Color(0xFF37AD6B).withOpacity(.17)
+            : Color(0xFF37AD6B).withOpacity(.27),
+        padding: EdgeInsets.all(30),
+        // height: 100,
+        width: double.infinity,
+        child: Column(
+          children: [
+            RatatedContainer(title: '${widget.projName}'),
+            SizedBox(height: 16),
+            Responsive.isDesktop(context)
+                ? widget.index % 2 == 0
+                    ? Row(
+                        children: [
+                          imgForDesktop,
+                          descForDesktop,
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          descForDesktop,
+                          imgForDesktop,
+                        ],
+                      )
+                : Column(
+                    children: [
+                      imgForTablet,
+                      descForTablet,
+                    ],
+                  ),
+          ],
+        ),
       ),
     );
   }
@@ -1214,7 +1285,7 @@ class ProjectListTablet extends StatelessWidget {
               padding: const EdgeInsets.all(14.0),
               child: Image.asset(
                 projImage,
-                color: Theme.of(context).textTheme.headline1.color,
+                color: Theme.of(context).textTheme.bodyText1.color,
                 width: Get.width * 0.4,
               ),
             ),
@@ -1241,7 +1312,7 @@ class ProjectListTablet extends StatelessWidget {
           '$projDesc',
           style: TextStyle(
             fontSize: 14,
-            color: Theme.of(context).textTheme.headline1.color,
+            color: Theme.of(context).textTheme.bodyText1.color,
           ),
           textAlign: TextAlign.left,
         ),
@@ -1346,14 +1417,14 @@ class IconUsed extends StatelessWidget {
         SvgPicture.asset(
           img,
           height: 20,
-          color: Theme.of(context).textTheme.headline1.color,
+          color: Theme.of(context).textTheme.bodyText1.color,
         ),
         SizedBox(height: 6),
         Text(
           title,
           style: TextStyle(
             fontSize: 10,
-            color: Theme.of(context).textTheme.headline1.color,
+            color: Theme.of(context).textTheme.bodyText1.color,
             fontWeight: FontWeight.w400,
           ),
           textAlign: TextAlign.left,

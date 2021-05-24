@@ -46,13 +46,14 @@ ThemeData darkThemeData(BuildContext context) {
     fontFamily: 'Poppins',
     inputDecorationTheme: inputDecorationTheme(),
     textTheme: TextTheme(
-        bodyText1: TextStyle(
+        headline1: TextStyle(
           color: kDarkTextColor,
         ),
         bodyText2: TextStyle(
           color: kDarkTextColor1,
         ),
-        headline1: TextStyle(color: Colors.white)),
+        bodyText1: TextStyle(color: Color(0xFF919191))),
+    // headline1: TextStyle(color: Color(0xFF919191))),
   );
 }
 

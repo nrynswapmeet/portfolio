@@ -16,12 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Laxminarayan\'s Portfolio',
       theme: themeData(context),
       darkTheme: darkThemeData(context),
-      // themeMode:
-      //     themeController.isDark.value ? ThemeMode.dark : ThemeMode.light,
-      // home: HomeScreen(),
       home: LandingScreen(),
     );
   }

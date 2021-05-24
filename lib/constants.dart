@@ -18,7 +18,7 @@ const kSubTitleColor = Color(0xFF727272);
 const kLightBackgroundColor = Color(0xFFD0D0D0);
 const kDarkBackgroundColor = Color(0xFF061218);
 
-const kDarkTextColor = Color(0xFFD0D0D0);
+const kDarkTextColor = Color(0xFFd9d9d9);
 const kLightTextColor = Color(0xFF061218);
 
 const kDarkTextColor1 = Color(0xFFA6B1BB);
@@ -26,6 +26,9 @@ const kLightTextColor1 = Color(0xFF3F4448);
 
 const kGreenColor = Color(0xFF0EC145);
 const kCardColor = Color(0xD7222222);
+
+const kDarkHeadline = Color(0xFF919191);
+const kLightHeadline = Color(0xD7222222);
 
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topCenter,

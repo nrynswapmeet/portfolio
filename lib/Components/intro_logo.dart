@@ -19,7 +19,8 @@ class IntroLogo extends StatelessWidget {
       child: Text.rich(
         TextSpan(
           text: 'nryn',
-          style: GoogleFonts.roboto(
+          style: TextStyle(
+            fontFamily: 'Roboto',
             fontSize: 42,
             fontWeight: FontWeight.bold,
             color: _iconColorTween.value,
