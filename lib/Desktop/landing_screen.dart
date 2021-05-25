@@ -1,5 +1,6 @@
 import 'dart:ui';
-// import 'dart:html' as html;
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -857,12 +858,12 @@ class _LandingScreenState extends State<LandingScreen>
                             DefaultButton(
                               text: 'DOWNLOAD RESUME',
                               press: () {
-                                // String url =
-                                //     'https://github.com/laxminarayan1998/portfolio_data/raw/main/Laxminarayan%20Resume.pdf';
-                                // html.AnchorElement anchorElement =
-                                //     new html.AnchorElement(href: url);
-                                // anchorElement.download = url;
-                                // anchorElement.click();
+                                String url =
+                                    'https://github.com/laxminarayan1998/portfolio_data/raw/main/Laxminarayan%20Resume.pdf';
+                                html.AnchorElement anchorElement =
+                                    new html.AnchorElement(href: url);
+                                anchorElement.download = url;
+                                anchorElement.click();
                               },
                             )
                           ],
