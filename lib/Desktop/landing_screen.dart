@@ -764,7 +764,7 @@ class _LandingScreenState extends State<LandingScreen>
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: 'LAXMINARAYAN',
+                                    text: 'LAXMINARAYANNN',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                     ),
