@@ -1,12 +1,10 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
 import 'dart:ui';
+// import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:laxminarayan_portfolio/Components/dark_button.dart';
 import 'package:laxminarayan_portfolio/Components/intro_logo.dart';
 import 'package:laxminarayan_portfolio/Controller/resource_controller.dart';
@@ -72,7 +70,8 @@ class _LandingScreenState extends State<LandingScreen>
                       child: Text.rich(
                         TextSpan(
                           text: 'nryn',
-                          style: GoogleFonts.roboto(
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
                             fontSize: 42,
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).textTheme.bodyText1.color,
@@ -858,12 +857,12 @@ class _LandingScreenState extends State<LandingScreen>
                             DefaultButton(
                               text: 'DOWNLOAD RESUME',
                               press: () {
-                                String url =
-                                    'https://github.com/laxminarayan1998/portfolio_data/raw/main/Laxminarayan%20Resume.pdf';
-                                html.AnchorElement anchorElement =
-                                    new html.AnchorElement(href: url);
-                                anchorElement.download = url;
-                                anchorElement.click();
+                                // String url =
+                                //     'https://github.com/laxminarayan1998/portfolio_data/raw/main/Laxminarayan%20Resume.pdf';
+                                // html.AnchorElement anchorElement =
+                                //     new html.AnchorElement(href: url);
+                                // anchorElement.download = url;
+                                // anchorElement.click();
                               },
                             )
                           ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:laxminarayan_portfolio/constants.dart';
 import 'package:laxminarayan_portfolio/default_button.dart';
 import 'package:laxminarayan_portfolio/project_controller.dart';
@@ -55,7 +54,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               children: [
                 Text(
                   'nryn',
-                  style: GoogleFonts.roboto(
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
                       fontSize: 42,
                       fontWeight: FontWeight.bold,
                       color: _iconColorTween.value),
