@@ -1,9 +1,8 @@
-import 'dart:ui';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:laxminarayan_portfolio/Components/dark_button.dart';
@@ -414,6 +413,7 @@ class _LandingScreenState extends State<LandingScreen>
                   }
                   return ListView.builder(
                     shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return ProjectList(
                         index: index,

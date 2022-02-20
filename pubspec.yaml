@@ -17,6 +17,7 @@ dependencies:
   get: ^3.26.0
   url_launcher: ^6.0.3
   http:
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:
